@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22aa257b109a3e4b34e34d44d864503e",
+    "content-hash": "d395961b836a4b6209273c35d90fd5e8",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -1731,34 +1731,6 @@
             ],
             "description": "A polyfill for getallheaders.",
             "time": "2016-02-11T07:05:27+00:00"
-        },
-        {
-            "name": "simple-html-dom/simple-html-dom",
-            "version": "1.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/miclf/simple-html-dom.git",
-                "reference": "961610576c460546677a635062e9d3d7b6dab745"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/miclf/simple-html-dom/zipball/961610576c460546677a635062e9d3d7b6dab745",
-                "reference": "961610576c460546677a635062e9d3d7b6dab745",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "S.C. Chen",
-                    "email": "me578022@gmail.com"
-                }
-            ],
-            "description": "A copy of the PHP Simple HTML DOM Parser project.",
-            "time": "2013-05-14T22:27:35+00:00"
         },
         {
             "name": "symfony/console",

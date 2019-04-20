@@ -14,7 +14,6 @@
         }
     },
     "require": {
-        "laravel/passport": "^5.0||^6.0||^7.0",
-        "simple-html-dom/simple-html-dom": "*"
+        "laravel/passport": "^5.0||^6.0||^7.0"
     }
 }
