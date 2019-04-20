@@ -9,7 +9,6 @@ use Laravel\Passport\Bridge\UserRepository;
 use Laravel\Passport\Passport;
 use Laravel\Passport\PassportServiceProvider;
 use League\OAuth2\Server\AuthorizationServer;
-use League\OAuth2\Server\Grant\PasswordGrant;
 
 class SagresLoginGrantProvider extends PassportServiceProvider {
     public function boot() {

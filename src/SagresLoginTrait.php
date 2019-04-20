@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Log;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Throwable;
 
+include "simple_html_dom.php";
+
 trait SagresLoginTrait
 {
 
@@ -26,8 +28,6 @@ trait SagresLoginTrait
             $password = $request->get('password');
             $institution = $request->get('institution');
 
-            Log::info('Attempt to login user '.$username);
-
             if ($username && $password && $institution) {
                 $url = config('sagres.institutions.'.$institution.'.login');
                 $form = config('sagres.institutions.'.$institution.'.form');
@@ -35,9 +35,6 @@ trait SagresLoginTrait
 
                 $form['ctl00$PageContent$LoginPanel$UserName'] = $username;
                 $form['ctl00$PageContent$LoginPanel$Password'] = $password;
-
-                Log::info('This is how the form looks like:');
-                Log::info($form);
 
                 // Make request to Sagres
                 $client = new Client(['cookies' => true]);
@@ -49,12 +46,11 @@ trait SagresLoginTrait
                 $code = $response->getStatusCode();
                 // If request is successful
                 if ($code >= 200 && $code < 300) {
-                    Log::info('Sagres response successful');
                     $content = $response->getBody()->getContents();
                     $html = str_get_html($content);
                     $name = $html->find('span[class=usuario-nome]');
-                    Log::info('The extracted name is '.$name);
-                    if ($name) {
+                    if (count($name) > 0) {
+                        Log::info('The extracted name is '.$name[0]);
                         $userModel = config('auth.providers.users.model');
                         $sagres_username_column = config('sagres.registration.username', 'username');
                         $user = $userModel::where($sagres_username_column, $username . '_' . $institution)->first();
