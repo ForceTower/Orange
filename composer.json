@@ -1,0 +1,20 @@
+{
+    "name": "forcetower/u-passport-login",
+    "description": "SAGRES Token request grant for Laravel Passport",
+    "type": "library",
+    "authors": [
+        {
+            "name": "João Paulo Sena",
+            "email": "joaopaulo761@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ForceTower\\UPassportLogin\\": "src"
+        }
+    },
+    "require": {
+        "laravel/passport": "^5.0||^6.0||^7.0",
+        "simple-html-dom/simple-html-dom": "*"
+    }
+}
