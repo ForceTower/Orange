@@ -7,7 +7,6 @@ use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Throwable;
 
@@ -30,9 +29,13 @@ trait SagresLoginTrait
             $institution = $request->get('institution');
 
             if ($username && $password && $institution) {
-                $url = config('sagres.institutions.'.$institution.'.login');
-                $form = config('sagres.institutions.'.$institution.'.form');
+                $url = config('sagres.institutions.'.$institution.'.login', null);
+                $form = config('sagres.institutions.'.$institution.'.form', null);
                 $headers = config('sagres.headers');
+
+                if (!$url || !$form) {
+                    throw OAuthServerException::accessDenied('Institution is not supported');
+                }
 
                 $form['ctl00$PageContent$LoginPanel$UserName'] = $username;
                 $form['ctl00$PageContent$LoginPanel$Password'] = $password;
