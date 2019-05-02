@@ -64,6 +64,7 @@ trait SagresLoginTrait
 
                         // Find the user
                         $user = null;
+                        $username = strtolower($username);
                         // If it contains a @ it means user connected with email
                         $emailConnected = strpos($username, '@') !== false;
                         if ($emailConnected) {
