@@ -26,7 +26,7 @@ trait SagresLoginTrait
         try {
             $username = $request->get('username');
             $password = $request->get('password');
-            $institution = $request->get('institution');
+            $institution = strtolower($request->get('institution'));
 
             if ($username && $password && $institution) {
                 $url = config('sagres.institutions.'.$institution.'.login', null);
