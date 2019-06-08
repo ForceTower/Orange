@@ -61,6 +61,7 @@ trait SagresLoginTrait
                         $sagres_password_column = config('sagres.registration.password', 'password');
                         $sagres_email_column    = config('sagres.registration.email', 'email');
                         $sagres_create_account  = config('sagres.registration.create_account', true);
+                        $sagres_name_column     = config('sagres.registration.name', null);
 
                         // Find the user
                         $user = null;
@@ -77,6 +78,9 @@ trait SagresLoginTrait
                         if (!$user && $sagres_create_account) {
                             $user = new $userModel();
 
+                            if ($sagres_name_column)
+                                $user->{$sagres_name_column} = $name;
+
                             if ($emailConnected) {
                                 $user->{$sagres_email_column} = $username;
                                 $newUsername = explode('@', $username)[0];
@@ -86,6 +90,11 @@ trait SagresLoginTrait
                             }
 
                             $user->{$sagres_password_column} = Hash::make($password);
+                            $user->save();
+                        }
+
+                        if ($sagres_name_column && !$user->{$sagres_name_column}) {
+                            $user->{$sagres_name_column} = $name;
                             $user->save();
                         }
 
