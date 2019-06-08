@@ -52,9 +52,9 @@ trait SagresLoginTrait
                 if ($code >= 200 && $code < 300) {
                     $content = $response->getBody()->getContents();
                     $crawler = new Crawler($content);
-                    $name = $crawler->filter('span[class=usuario-nome]');
+                    $name = $crawler->filter('span[class=usuario-nome]')->first()->text();
                     // If the trait is able to verify the user
-                    if (count($name) > 0) {
+                    if (strlen($name) > 0) {
                         // Find config fields
                         $userModel              = config('auth.providers.users.model');
                         $sagres_username_column = config('sagres.registration.username', 'username');
