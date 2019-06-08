@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use League\OAuth2\Server\Exception\OAuthServerException;
 use Sunra\PhpSimple\HtmlDomParser;
+use Symfony\Component\DomCrawler\Crawler;
 use Throwable;
 
 trait SagresLoginTrait
@@ -50,8 +51,8 @@ trait SagresLoginTrait
                 // If request is successful
                 if ($code >= 200 && $code < 300) {
                     $content = $response->getBody()->getContents();
-                    $html = HtmlDomParser::str_get_html($content);
-                    $name = $html->find('span[class=usuario-nome]');
+                    $crawler = new Crawler($content);
+                    $name = $crawler->filter('span[class=usuario-nome]');
                     // If the trait is able to verify the user
                     if (count($name) > 0) {
                         // Find config fields
