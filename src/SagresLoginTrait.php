@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use League\OAuth2\Server\Exception\OAuthServerException;
+use Sunra\PhpSimple\HtmlDomParser;
 use Throwable;
-
-include "simple_html_dom.php";
 
 trait SagresLoginTrait
 {
@@ -51,7 +50,7 @@ trait SagresLoginTrait
                 // If request is successful
                 if ($code >= 200 && $code < 300) {
                     $content = $response->getBody()->getContents();
-                    $html = str_get_html($content);
+                    $html = HtmlDomParser::str_get_html($content);
                     $name = $html->find('span[class=usuario-nome]');
                     // If the trait is able to verify the user
                     if (count($name) > 0) {
